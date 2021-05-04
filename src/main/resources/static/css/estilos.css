@@ -1,0 +1,22 @@
+.navmio{
+		
+	background: cyan;
+	padding: 8px 16px 8px 16px;
+	text-align: center;
+	
+}
+
+body {
+		 background:url(../img/250px-Aquamarine_Square.png) no-repeat center top;
+		 background-size: cover;
+}
+
+.table {
+		background-color: rgb(242, 226, 111);
+}
+
+.columna {
+		background:url(../img/250px-Aquamarine_Square.png) no-repeat center top ;
+		font-family: sans-serif;
+		font-weight: 10px;
+}
