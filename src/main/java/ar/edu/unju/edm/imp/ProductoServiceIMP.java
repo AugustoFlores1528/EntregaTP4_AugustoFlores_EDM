@@ -57,5 +57,36 @@ public class ProductoServiceIMP implements ProductoService{
 		int i = listaDeProductos.size() - 1;
 		return listaDeProductos.get(i);
 	}
+
+	@Override
+	public Producto encontrarUnProducto(int cod) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listaDeProductos.size(); i++){
+		    if (listaDeProductos.get(i).getCodigoP() == cod) {
+		    	unProducto = listaDeProductos.get(i);
+		    }
+		}
+		return unProducto;
+	}
+
+	@Override
+	public void modificarProducto(Producto productoModificado) {
+		// TODO Auto-generated method stub
+				for (int i = 0; i < listaDeProductos.size(); i++){
+				    if (listaDeProductos.get(i).getCodigoP() == productoModificado.getCodigoP()) {
+				    	listaDeProductos.set(i, productoModificado);
+				    }
+				}
+	}
+
+	@Override
+	public void eliminarProducto(int id) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < listaDeProductos.size(); i++){
+		    if (listaDeProductos.get(i).getCodigoP() == id) {
+		    	listaDeProductos.remove(i);
+		    }
+		}
+	}
 	
 }

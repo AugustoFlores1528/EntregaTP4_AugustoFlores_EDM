@@ -13,6 +13,9 @@ public interface ProductoService {
 	public Producto obtenerUnP(String nombreP);
 	public List<Producto> obtenerTodosP();
 	public Producto obtenerNuevoP();
+	public Producto encontrarUnProducto(int cod);
+	public void modificarProducto(Producto productoModificado);
+	public void eliminarProducto(int id);
 	Producto obtenerUltimoP();
 	
 }

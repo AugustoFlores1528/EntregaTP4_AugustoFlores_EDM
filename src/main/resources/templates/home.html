@@ -14,27 +14,35 @@
 <div th:insert="layouts/header :: header"></div>
 <form id="formUsuario">
 
+<br>
         <div class="form-group row">
         <label for="idusuario" class="col-sm-2 col-form-label">Usuario</label>
         <div class="col-sm-10"> 
-        <input type="text" id="idusuario" class="form-control">
+        <input type="text" id="idusuario" class="form-control" required>
         </div>
         </div>
         
         <div class="form-group row">     
         <label for="contraseña" class="col-sm-2 col-form-label">Contraseña</label>
         <div class="col-sm-10"> 
-        <input type="password" id="contraseña" class="form-control">
+        <input type="password" id="contraseña" class="form-control" required>
         </div>
         </div>
         
-         <div class="d-grid gap-2">
-             <button class="btn btn-secondary" type="submit" value="Agregar">Agregar</button>
-        </div>
+        <div class="form-group form-check">
+		<input type="checkbox" class="form-check-input" id="recordarme">
+		<label class="form-check-label" for="recordarme">Recordar nombre de usuario</label>
+	    </div>
+					
+		<input type="submit" class="btn btn-success btn-block"  value="Acceder">
+		<br>
+		
+		<a href="#">¿Olvidó su nombre de usuario o contraseña?</a>
         
     </form>
 </div>
 <div th:insert="layouts/footer :: footer"></div>
+
 <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"		type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 	<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"		type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
 	<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"		type="text/javascript"		src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
