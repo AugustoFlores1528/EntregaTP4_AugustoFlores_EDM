@@ -83,10 +83,9 @@
 						<td th:text="${p.stockP}"></td>
 						
 						<td>
-						<a href="#"
-						th:href="@{'/producto/editar/'+${p.codigoP}}"> <i
-							class="fa fa-edit"></i>
-							</a> <a
+						<a href="#"	th:href="@{'/producto/editar/'+${p.codigoP}}"> <i class="fa fa-edit"></i>
+							</a> 
+							<a
 						th:onclick="'javascript:confirmarEliminar(\''+${p.codigoP}+'\');'">
 							<i class="fa fa-trash-alt"></i>
 					    </a>
@@ -109,15 +108,15 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<h6>Are you sure you want to delete this product?</h6>
+						<h6>Seguro que quiere elminar este producto?</h6>
 					</div>
 					<input type="hidden" id="identificadorProducto"
 						name="productoId" />
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
+							data-dismiss="modal">Cerrar</button>
 						<button type="button" class="btn btn-primary"
-							th:onclick="eliminarProducto()">Delete Product</button>
+							th:onclick="eliminarProducto()">Eliminar Producto</button>
 					</div>
 				</div>
 			</div>

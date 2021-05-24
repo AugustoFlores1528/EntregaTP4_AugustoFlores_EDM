@@ -1,8 +1,12 @@
 package ar.edu.unju.edm.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,7 @@ import ar.edu.unju.edm.service.ProductoService;
 public class ProductoController {
 	
 	@Autowired
+	@Qualifier("impsqlp")
 	ProductoService iProductoService;
 	
 	@GetMapping("/producto/mostrar")
@@ -58,10 +63,18 @@ public class ProductoController {
 	}
 	
 	@PostMapping("/producto/guardar")
-	public String guardarNuevoP(@ModelAttribute("unProducto") Producto nuevoProducto, Model model) {
-		iProductoService.guardarP(nuevoProducto);
-		System.out.println(iProductoService.obtenerTodosP().get(0).getMarcaP());
-		return "redirect:/producto/mostrar";
+	public String guardarNuevoProducto(@Valid @ModelAttribute("unProducto") Producto nuevoProducto,BindingResult resultadoP, Model model) {
+		if (resultadoP.hasErrors())
+		{
+			model.addAttribute("unProducto", nuevoProducto);
+			model.addAttribute("clientes", iProductoService.obtenerTodosP());
+			return ("producto");
+		}
+		else
+		{
+		    iProductoService.guardarP(nuevoProducto);
+			return ("redirect:/producto/mostrar");
+		}
 	}
 	
 	@GetMapping("/ultimo")

@@ -1,10 +1,14 @@
 package ar.edu.unju.edm.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +22,7 @@ public class ClienteController {
 	private static final Log LOGGER = LogFactory.getLog(ClienteController.class);
 	
 	@Autowired
+	@Qualifier("impsql")
 	IClienteService clienteService;
 	
 	@GetMapping("/cliente/mostrar")
@@ -61,11 +66,29 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/cliente/guardar")
-	public String guardarNuevoProducto(@ModelAttribute("unCliente") Cliente nuevoCliente, Model model) {
-		LOGGER.info("METHOD: ingresando al metodo guardar");
-		clienteService.guardarC(nuevoCliente);
+	public String guardarNuevoCliente(@Valid @ModelAttribute("unCliente") Cliente nuevoCliente,BindingResult resultado, Model model) {
+	if (resultado.hasErrors())
+	{
+		model.addAttribute("unCliente", nuevoCliente);
+		model.addAttribute("clientes", clienteService.obtenerTodosC());
+		return ("cliente");
+	}
+	else
+	{
+	    LOGGER.info("METHOD: ingresando al metodo guardar");	
+	    clienteService.guardarC(nuevoCliente);
 		LOGGER.info("Tamaño del Listado: "+ clienteService.obtenerTodosC().size());
-		
 		return ("redirect:/cliente/mostrar");
+	}
+	}
+	
+	@GetMapping("/cliente/eliminarCliente/{id}")
+	public String eliminarCliente(Model model, @PathVariable(name="id") int id) {
+		try {			clienteService.eliminarCliente(id);			
+		}
+		catch(Exception e){
+			model.addAttribute("listErrorMessage",e.getMessage());
+		}			
+		return "redirect:/cliente/mostrar";
 	}
 }
