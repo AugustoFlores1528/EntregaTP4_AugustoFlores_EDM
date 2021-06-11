@@ -51,7 +51,16 @@
         <input type="number" id="stock" th:field="*{stockP}" class="form-control">
         </div>
 		</div>
-                
+        
+        <div class="form-group row">
+		<label for="file" class="col-sm-2 col-form-label">Subir Imagen </label>
+		<div class="col-sm-10">
+		<input type="file" name="file" class="form-control-file" id="file" accept="image/x-png,image/gif,image/jpeg,image/png,image/jpeg" onchange="loadFile(event)">
+		<img id="output" style="padding-top: 2px; width: 146px;" />
+		</div>
+		</div>
+        
+          
         <input type="submit" class="btn btn-success btn-block" th:value="${editMode}?'Modificar Producto':'Crear Producto'">
 				<!-- <button type="submit" class="btn btn-primary" value="Agregar">Agregar</button> -->
         
@@ -67,7 +76,8 @@
 				      <th>Nombre</th>
 				      <th>Precio</th>
 				      <th>Marca</th>
-				      <th>Stock</th>				      
+				      <th>Stock</th>
+				      <th>Imagen</th>	      
 				    </tr>
 				    </thead>
 				    
@@ -81,7 +91,8 @@
 						<td th:text="${p.precioP}"></td>
 						<td th:text="${p.marcaP}"></td>
 						<td th:text="${p.stockP}"></td>
-						
+						<td th:text="${p.imagen}"></td>
+						<td><img th:src="*{'data:;base64,'+p.imagen}" class="card-img-top" alt="hola"></td>
 						<td>
 						<a href="#"	th:href="@{'/producto/editar/'+${p.codigoP}}"> <i class="fa fa-edit"></i>
 							</a> 
